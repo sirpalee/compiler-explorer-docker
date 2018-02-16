@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Download and unpack compilers
 RUN mkdir -p /opt/compilers
 WORKDIR /opt/compilers
-RUN curl -sL https://s3.amazonaws.com/compiler-explorer/opt/gcc-7.2.0.tar.xz | tar Jxf - && \
+RUN curl -sL https://s3.amazonaws.com/compiler-explorer/opt/gcc-4.8.5.tar.xz | tar Jxf - && \
+    curl -sL https://s3.amazonaws.com/compiler-explorer/opt/gcc-6.3.0.tar.xz | tar Jxf - && \
     curl -sL https://s3.amazonaws.com/compiler-explorer/opt/clang-5.0.0.tar.xz | tar Jxf -
 
 # Create user and create working directories 
@@ -28,7 +29,7 @@ USER ceuser
 # Install node and update npm
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash && \
     . ~/.profile && \
-    nvm install node && \
+    nvm install 8 && \
     npm install npm -g
 
 # Do the initial checkout of the source and install prereqs
